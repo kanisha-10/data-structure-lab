@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int cmp_int(const void *a, const void *b) {
+    return (*(int*)a) - (*(int*)b);
+}
+
+int main() {
+    int n;
+    printf("Enter number of elements: ");
+    if (scanf("%d", &n) != 1 || n <= 0) return 0;
+    int *a = malloc(n * sizeof(int));
+    for (int i = 0; i < n; ++i) scanf("%d", &a[i]);
+
+    qsort(a, n, sizeof(int), cmp_int);
+
+    int i = 0;
+    int found_any = 0;
+    while (i < n) {
+        int j = i + 1;
+        while (j < n && a[j] == a[i]) ++j;
+        int count = j - i;
+        if (count > 1) {
+            printf("Number %d repeats %d times\n", a[i], count);
+            found_any = 1;
+        }
+        i = j;
+    }
+    if (!found_any) printf("No repeated numbers\n");
+    free(a);
+    return 0;
+}
