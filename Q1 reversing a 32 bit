@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <limits.h>
+
+int reverse_int(int x) {
+    long long rev = 0;
+    while (x != 0) {
+        int digit = x % 10;
+        rev = rev * 10 + digit;
+        if (rev > INT_MAX || rev < INT_MIN) return 0; // overflow
+        x /= 10;
+    }
+    return (int)rev;
+}
+
+int main() {
+    int n;
+    printf("Enter 32-bit signed integer: ");
+    if (scanf("%d", &n) != 1) return 0;
+    int r = reverse_int(n);
+    if (r == 0) printf("Reversed value is 0 (possible overflow or original reversed to 0).\n");
+    else printf("Reversed: %d\n", r);
+    return 0;
+}
