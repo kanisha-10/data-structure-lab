@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main() {
+    int arr[100], n, key, low, high, mid, found = 0;
+
+    // Input number of registration numbers
+    printf("Enter the number of registration numbers: ");
+    scanf("%d", &n);
+
+    // Input registration numbers (sorted order)
+    printf("Enter %d registration numbers in ascending order:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Input the registration number to search
+    printf("Enter the registration number to search: ");
+    scanf("%d", &key);
+
+    // Binary Search
+    low = 0;
+    high = n - 1;
+
+    while (low <= high) {
+        mid = (low + high) / 2;
+
+        if (arr[mid] == key) {
+            found = 1;
+            break;
+        } else if (arr[mid] < key) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+
+    // Display result
+    if (found)
+        printf("Registration number %d found at position %d.\n", key, mid + 1);
+    else
+        printf("Registration number %d not found.\n", key);
+
+    return 0;
+}
