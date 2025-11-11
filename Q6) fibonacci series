@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    printf("Enter number of Fibonacci terms (n >= 1): ");
+    if (scanf("%d", &n) != 1 || n < 1) return 0;
+    long long a = 0, b = 1;
+    long long sum = 0;
+    if (n >= 1) sum += a; // include F0 if desired; if you want starting at F1 change accordingly
+    if (n >= 2) sum += b;
+    for (int i = 3; i <= n; ++i) {
+        long long c = a + b;
+        sum += c;
+        a = b; b = c;
+    }
+    printf("Sum of first %d Fibonacci terms = %lld\n", n, sum);
+    return 0;
+}
