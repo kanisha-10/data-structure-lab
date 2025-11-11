@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <limits.h>
+#include <stdlib.h>
+
+int main() {
+    int r, c;
+    printf("Enter rows and columns: ");
+    if (scanf("%d %d", &r, &c) != 2 || r <= 0 || c <= 0) return 0;
+    int maxv = INT_MIN;
+    printf("Enter matrix elements row-wise:\n");
+    for (int i = 0; i < r; ++i)
+        for (int j = 0; j < c; ++j) {
+            int v;
+            scanf("%d", &v);
+            if (v > maxv) maxv = v;
+        }
+    printf("Largest element = %d\n", maxv);
+    return 0;
+}
