@@ -1,0 +1,63 @@
+#include <stdio.h>
+
+int main() {
+    int x, y, z;
+    int A[10][10][10], B[10][10][10], C[10][10][10];
+    int i, j, k;
+
+    printf("Enter dimensions (x y z): ");
+    scanf("%d %d %d", &x, &y, &z);
+
+    printf("Enter elements of 3D Matrix A:\n");
+    for (i = 0; i < x; i++)
+        for (j = 0; j < y; j++)
+            for (k = 0; k < z; k++)
+                scanf("%d", &A[i][j][k]);
+
+    printf("Enter elements of 3D Matrix B:\n");
+    for (i = 0; i < x; i++)
+        for (j = 0; j < y; j++)
+            for (k = 0; k < z; k++)
+                scanf("%d", &B[i][j][k]);
+
+    // Addition
+    printf("\n3D Matrix Addition Result:\n");
+    for (i = 0; i < x; i++) {
+        printf("Layer %d:\n", i + 1);
+        for (j = 0; j < y; j++) {
+            for (k = 0; k < z; k++) {
+                C[i][j][k] = A[i][j][k] + B[i][j][k];
+                printf("%d ", C[i][j][k]);
+            }
+            printf("\n");
+        }
+    }
+
+    // Subtraction
+    printf("\n3D Matrix Subtraction Result:\n");
+    for (i = 0; i < x; i++) {
+        printf("Layer %d:\n", i + 1);
+        for (j = 0; j < y; j++) {
+            for (k = 0; k < z; k++) {
+                C[i][j][k] = A[i][j][k] - B[i][j][k];
+                printf("%d ", C[i][j][k]);
+            }
+            printf("\n");
+        }
+    }
+
+    // Multiplication (layer-wise)
+    printf("\n3D Matrix Multiplication Result (layer-wise):\n");
+    for (i = 0; i < x; i++) {
+        printf("Layer %d:\n", i + 1);
+        for (j = 0; j < y; j++) {
+            for (k = 0; k < z; k++) {
+                C[i][j][k] = A[i][j][k] * B[i][j][k];
+                printf("%d ", C[i][j][k]);
+            }
+            printf("\n");
+        }
+    }
+
+    return 0;
+}
