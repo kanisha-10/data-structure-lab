@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+int main() {
+    int A[10][10], B[10][10], C[10][10], T[10][10];
+    int r, c, i, j, k;
+
+    printf("Enter rows and columns: ");
+    scanf("%d %d", &r, &c);
+
+    printf("Enter elements of matrix A:\n");
+    for (i = 0; i < r; i++)
+        for (j = 0; j < c; j++)
+            scanf("%d", &A[i][j]);
+
+    printf("Enter elements of matrix B:\n");
+    for (i = 0; i < r; i++)
+        for (j = 0; j < c; j++)
+            scanf("%d", &B[i][j]);
+
+    // Addition
+    printf("\nAddition of two matrices:\n");
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            C[i][j] = A[i][j] + B[i][j];
+            printf("%d ", C[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Subtraction
+    printf("\nSubtraction of two matrices:\n");
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            C[i][j] = A[i][j] - B[i][j];
+            printf("%d ", C[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Multiplication
+    printf("\nMultiplication of two matrices:\n");
+    for (i = 0; i < r; i++)
+        for (j = 0; j < c; j++) {
+            C[i][j] = 0;
+            for (k = 0; k < c; k++)
+                C[i][j] += A[i][k] * B[k][j];
+        }
+
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++)
+            printf("%d ", C[i][j]);
+        printf("\n");
+    }
+
+    // Transpose
+    printf("\nTranspose of Matrix A:\n");
+    for (i = 0; i < r; i++)
+        for (j = 0; j < c; j++)
+            T[j][i] = A[i][j];
+
+    for (i = 0; i < c; i++) {
+        for (j = 0; j < r; j++)
+            printf("%d ", T[i][j]);
+        printf("\n");
+    }
+
+    return 0;
+}
