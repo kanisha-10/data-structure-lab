@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+int n, cost[10][10], visited[10];
+int minCost = 9999;
+
+void tsp(int city, int count, int totalCost) {
+    visited[city] = 1;
+
+    if(count == n && cost[city][0] > 0) {
+        if(totalCost + cost[city][0] < minCost)
+            minCost = totalCost + cost[city][0];
+        visited[city] = 0;
+        return;
+    }
+
+    for(int i = 0; i < n; i++) {
+        if(!visited[i] && cost[city][i] > 0) {
+            tsp(i, count + 1, totalCost + cost[city][i]);
+        }
+    }
+
+    visited[city] = 0;
+}
+
+int main() {
+    printf("Enter number of cities: ");
+    scanf("%d", &n);
+
+    printf("Enter cost matrix:\n");
+    for(int i = 0; i < n; i++)
+        for(int j = 0; j < n; j++)
+            scanf("%d", &cost[i][j]);
+
+    tsp(0, 1, 0);
+
+    printf("Minimum cost = %d\n", minCost);
+
+    return 0;
+}
