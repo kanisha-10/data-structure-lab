@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 10
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *hashTable[SIZE];
+
+void insert(int key) {
+    int index = key % SIZE;
+    struct node *newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = key;
+    newNode->next = NULL;
+
+    // If empty
+    if(hashTable[index] == NULL) {
+        hashTable[index] = newNode;
+    } else {
+        // Insert at end
+        struct node *temp = hashTable[index];
+        while(temp->next != NULL)
+            temp = temp->next;
+        temp->next = newNode;
+    }
+}
+
+void display() {
+    for(int i = 0; i < SIZE; i++) {
+        printf("Index %d: ", i);
+        struct node *temp = hashTable[i];
+        while(temp != NULL) {
+            printf("%d → ", temp->data);
+            temp = temp->next;
+        }
+        printf("NULL\n");
+    }
+}
+
+int main() {
+    int n, key;
+
+    for(int i = 0; i < SIZE; i++)
+        hashTable[i] = NULL;
+
+    printf("Enter number of keys: ");
+    scanf("%d", &n);
+
+    for(int i = 0; i < n; i++) {
+        printf("Enter key: ");
+        scanf("%d", &key);
+        insert(key);
+    }
+
+    printf("\nHash Table (Separate Chaining):\n");
+    display();
+
+    return 0;
+}
