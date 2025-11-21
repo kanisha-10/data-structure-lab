@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+    int list1[50], list2[50], merged[100];
+    int n1, n2, i, j;
+
+    printf("Enter size of list1: ");
+    scanf("%d", &n1);
+    printf("Enter elements of list1: ");
+    for(i = 0; i < n1; i++)
+        scanf("%d", &list1[i]);
+
+    printf("Enter size of list2: ");
+    scanf("%d", &n2);
+    printf("Enter elements of list2: ");
+    for(i = 0; i < n2; i++)
+        scanf("%d", &list2[i]);
+
+    // Copy list1
+    for(i = 0; i < n1; i++)
+        merged[i] = list1[i];
+
+    // Copy list2
+    for(j = 0; j < n2; j++)
+        merged[n1 + j] = list2[j];
+
+    printf("Merged List: ");
+    for(i = 0; i < n1 + n2; i++)
+        printf("%d ", merged[i]);
+
+    return 0;
+}
