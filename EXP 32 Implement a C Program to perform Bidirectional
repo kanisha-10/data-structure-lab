@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+#define MAX 20
+
+int graph[MAX][MAX];
+int visited1[MAX], visited2[MAX];
+int queue1[MAX], queue2[MAX];
+int front1 = -1, rear1 = -1;
+int front2 = -1, rear2 = -1;
+
+void enqueue1(int x) {
+    queue1[++rear1] = x;
+    if(front1 == -1) front1 = 0;
+}
+
+int dequeue1() {
+    return queue1[front1++];
+}
+
+void enqueue2(int x) {
+    queue2[++rear2] = x;
+    if(front2 == -1) front2 = 0;
+}
+
+int dequeue2() {
+    return queue2[front2++];
+}
+
+int main() {
+    int n, i, j, src, dest;
+
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+
+    printf("Enter adjacency matrix:\n");
+    for(i = 0; i < n; i++)
+        for(j = 0; j < n; j++)
+            scanf("%d", &graph[i][j]);
+
+    printf("Enter source: ");
+    scanf("%d", &src);
+
+    printf("Enter destination: ");
+    scanf("%d", &dest);
+
+    enqueue1(src);
+    enqueue2(dest);
+    visited1[src] = visited2[dest] = 1;
+
+    while(front1 <= rear1 && front2 <= rear2) {
+        int u = dequeue1();
+        int v = dequeue2();
+
+        for(i = 0; i < n; i++) {
+            if(graph[u][i] && !visited1[i]) {
+                visited1[i] = 1;
+                enqueue1(i);
+            }
+            if(graph[v][i] && !visited2[i]) {
+                visited2[i] = 1;
+                enqueue2(i);
+            }
+            if(visited1[i] && visited2[i]) {
+                printf("Path Found using Bidirectional Search\n");
+                return 0;
+            }
+        }
+    }
+
+    printf("No Path Found\n");
+    return 0;
+}
